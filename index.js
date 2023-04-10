@@ -24,8 +24,20 @@ app.post("/api/message",async (req, res) => {
     secure: true,
     auth: {
         user: 'lighthunter222@gmail.com',
-        pass: 'ygwpderufvboynyz'
+        pass: 'xfvghykadtrsvtlc'
     }
+});
+await new Promise((resolve, reject) => {
+  // verify connection configuration
+  transporter.verify(function (error, success) {
+      if (error) {
+          console.log(error);
+          reject(error);
+      } else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+      }
+  });
 });
 let message = {
   from: 'lighthunter222@gmail.com',

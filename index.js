@@ -11,7 +11,7 @@ const mongoose=require('mongoose')
 const uri = "mongodb+srv://shahbaz:jasim123@cluster0.c1ikhi4.mongodb.net/test2?retryWrites=true&w=majority";
 
 app.get("/hello", (req, res) => {
-  res.send("hello world");
+  res.send("hello world !");
     
 });
 

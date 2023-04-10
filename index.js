@@ -45,19 +45,18 @@ let message = {
   subject: 'Test Email',
   text: 'This is a test email.'
 };
-try {
-  transporter.sendMail(message, function(error, info){
-    if(error){
-        console.log(error);
-    }else{
-        console.log('Email sent: ' + info.response);
-    }
+await new Promise((resolve, reject) => {
+  // send mail
+  transporter.sendMail(mailData, (err, info) => {
+      if (err) {
+          console.error(err);
+          reject(err);
+      } else {
+          console.log(info);
+          resolve(info);
+      }
   });
-  
-} catch (error) {
-  console.log(err,'tfghj')
-  
-}
+});
 
   try {
   await Messages.create({

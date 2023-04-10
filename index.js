@@ -23,40 +23,53 @@ app.post("/api/message",async (req, res) => {
     port: 465,
     secure: true,
     auth: {
-        user: 'lighthunter222@gmail.com',
-        pass: 'xfvghykadtrsvtlc'
-    }
-});
-await new Promise((resolve, reject) => {
-  // verify connection configuration
-  transporter.verify(function (error, success) {
-      if (error) {
-          console.log(error);
-          reject(error);
-      } else {
-          console.log("Server is ready to take our messages");
-          resolve(success);
+        user: 'muhammadsr972@gmail.com',
+      pass:'ufsbfhclwkqjxjoe',
       }
-  });
-});
+    });
+    // pass: 'xfvghykadtrsvtlc'
+// await new Promise((resolve, reject) => {
+//   // verify connection configuration
+//   transporter.verify(function (error, success) {
+//       if (error) {
+//           console.log(error);
+//           reject(error);
+//       } else {
+//           console.log("Server is ready to take our messages");
+//           resolve(success);
+//       }
+//   });
+// });
 let message = {
   from: 'lighthunter222@gmail.com',
   to: 'muhammadsr972@gmail.com',
   subject: 'Test Email',
   text: 'This is a test email.'
 };
-await new Promise((resolve, reject) => {
-  // send mail
-  transporter.sendMail(mailData, (err, info) => {
-      if (err) {
-          console.error(err);
-          reject(err);
-      } else {
-          console.log(info);
-          resolve(info);
-      }
-  });
+// await new Promise((resolve, reject) => {
+//   // send mail
+//   transporter.sendMail(mailData, (err, info) => {
+//       if (err) {
+//           console.error(err);
+//           reject(err);
+//       } else {
+//           console.log(info);
+//           resolve(info);
+//       }
+//   });
+// });
+try {
+  transporter.sendMail(message, function(error, info){
+    if(error){
+        console.log(error);
+    }else{
+        console.log('Email sent: ' + info.response);
+    }
 });
+
+} catch (error) {
+  console.log('error occurred while sending mail')
+}
 
   try {
   await Messages.create({

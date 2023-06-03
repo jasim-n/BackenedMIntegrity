@@ -5,10 +5,12 @@ let {Messages} =require('./models/user.model')
 app.use(cors());
 app.use(express.json());
 const nodemailer = require('nodemailer');
+require('dotenv').config();
+
 
 const usersRoutes =require('./Routes/userRoutes')
 const mongoose=require('mongoose')
-const uri = "mongodb+srv://shahbaz:jasim123@cluster0.c1ikhi4.mongodb.net/test2?retryWrites=true&w=majority";
+const uri = process.env.dblink;
 
 app.get("/hello", (req, res) => {
   res.send("hello world");
@@ -23,8 +25,8 @@ app.post("/api/message",async (req, res) => {
     port: 465,
     secure: true,
     auth: {
-        user: 'muhammadsr972@gmail.com',
-      pass:'ufsbfhclwkqjxjoe',
+        user: 'sherjeel1999@gmail.com',
+      pass:process.env.password,
       }
     });
     // pass: 'xfvghykadtrsvtlc'
@@ -41,10 +43,10 @@ app.post("/api/message",async (req, res) => {
 //   });
 // });
 let message = {
-  from: 'lighthunter222@gmail.com',
+  from: 'sherjeel1999@gmail.com',
   to: 'muhammadsr972@gmail.com',
   subject: 'Test Email',
-  text: 'This is a test email.'
+  text: `the user ${req.body.Email} has sent you a message ${req.body.message}`
 };
 // await new Promise((resolve, reject) => {
 //   // send mail
@@ -63,11 +65,12 @@ try {
     if(error){
         console.log(error);
     }else{
-        console.log('Email sent: ' + info.response);
+        console.log('Email sent: ' + info.response,message);
     }
 });
 
 } catch (error) {
+  res.status(400).send({message:'error occurred while sending mail'})
   console.log('error occurred while sending mail')
 }
 
@@ -84,7 +87,7 @@ try {
     
 } catch (error) {
     console.log('error',error,)
-    
+    res.status(400).send({message:'error occurred while sending mail'})
 }
    
   res.json({status:'ok'});
